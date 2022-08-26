@@ -1,10 +1,13 @@
 from curses.ascii import HT
+from urllib import request
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from blog.models import Post
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.models import User
+from blog_website.settings import EMAIL_HOST_USER
+from django.core.mail import send_mail
 
 
 # Create your views here.
@@ -43,6 +46,10 @@ class PostCreateView(LoginRequiredMixin, CreateView):
 
 	def form_valid(self, form):
 		form.instance.author = self.request.user
+		subject = 'Welcome to DataFlair'
+		message = 'Hope you are enjoying your Django Tutorials'
+		recepient = str(self.request.user.email)
+		send_mail(subject, message, EMAIL_HOST_USER, [recepient], fail_silently=False)
 		return super().form_valid(form)
 
 
