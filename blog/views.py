@@ -1,5 +1,4 @@
-from curses.ascii import HT
-from urllib import request
+from django.contrib.auth import get_user_model
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from blog.models import Post
@@ -26,7 +25,7 @@ class PostListView(ListView):
     ordering = '-date_posted'
     paginate_by = 2
 
-
+User = get_user_model()
 class UserPostListView(ListView):
     model = Post
     template_name = 'blog/user_posts.html'
