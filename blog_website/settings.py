@@ -28,7 +28,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEBUG_VALUE')
+DEBUG = os.environ.get('DEBUG_VALUE') == 'True'
 
 ALLOWED_HOSTS = ['djangoblogwebsitedeployment.herokuapp.com']
 
@@ -102,9 +102,9 @@ AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
     },
-    {
-        'NAME': 'django.contrib.asudo apt-get install postgresqluth.password_validation.NumericPasswordValidator',
-    },
+    # {
+    #     'NAME': 'django.contrib.asudo apt-get install postgresqluth.password_validation.NumericPasswordValidator',
+    # },
 ]
 
 
@@ -141,7 +141,7 @@ LOGIN_URL = 'login'
 # Authentication
 
 AUTH_USER_MODEL = 'users.CustomUser'
-AUTHENTICATION_BACKENDS = ['users.backends.EmailBackend'] # new
+AUTHENTICATION_BACKENDS = ['users.backends.EmailBackend']  # new
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
