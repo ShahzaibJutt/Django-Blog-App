@@ -1,7 +1,5 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
-
-from users.models import Profile
 from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm,LoginForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import views as auth_views
