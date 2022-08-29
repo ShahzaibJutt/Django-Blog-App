@@ -2,8 +2,9 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 
 from users.models import Profile
-from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
+from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm,LoginForm
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import views as auth_views
 
 
 def register(request):
@@ -39,3 +40,8 @@ def profile(request):
         'p_form': p_form
     }
     return render(request, 'users/profile.html', context)
+
+
+class LoginView(auth_views.LoginView):
+    form_class = LoginForm
+    template_name = 'users/login.html'

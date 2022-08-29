@@ -1,10 +1,15 @@
 from turtle import width
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUser
+from django.utils.translation import gettext_lazy as _
 from PIL import Image
 
+
+class CustomUser(AbstractUser):
+    email = models.EmailField(_('email address'), unique=True)
+
 class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
     image = models.ImageField(default='default.png', upload_to='profile_pics')
 
     def __str__(self):
@@ -18,3 +23,4 @@ class Profile(models.Model):
             size = (150,150)
             img.thumbnail(size)
             img.save(self.image.path)
+
